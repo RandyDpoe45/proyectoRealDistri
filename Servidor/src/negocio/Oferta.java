@@ -6,6 +6,7 @@
 package negocio;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -18,7 +19,16 @@ public class Oferta implements Serializable{
     private int experienciaRequerida;
     private float salarioOfrecido; 
     private SectorEmpresa sectorEmpresa ;
+    private List<Candidato> candidatos;
+    
+    public List<Candidato> getCandidatos(){
+        return candidatos;
+    }
 
+    public void setCandidatos(List<Candidato> candidatos) {
+        this.candidatos = candidatos;
+    }
+    
     public String getCargo() {
         return cargo;
     }

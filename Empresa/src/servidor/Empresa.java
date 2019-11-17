@@ -9,6 +9,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.Candidato;
@@ -26,12 +27,12 @@ public class Empresa {
     public static void main(String[] args) {
         try {
             //System.setProperty("java.rmi.server.hostname","192.168.43.171");
-            Registry registry = LocateRegistry.getRegistry("192.168.43.171", 9635);
+            Registry registry = LocateRegistry.getRegistry("127.0.0.1", 9635);
             OperacionesOferta stub = (OperacionesOferta) registry.lookup("Oferta");
             Oferta o = new Oferta();
             o.setCargo("vendedor de perico");
             o.setExperienciaRequerida(3);
-            Oferta response = stub.imprimirOferta(o);
+            Oferta response = stub.imprimirOferta(o,new ArrayList<>());
             System.out.println(response.getCargo());
         } catch (RemoteException ex) {
             Logger.getLogger(Oferta.class.getName()).log(Level.SEVERE, null, ex);

@@ -19,6 +19,7 @@ public class ImplementacionCandidato implements OperacionesCandidato{
 
     @Override
     public Candidato imprimirCandidato(Candidato c) throws RemoteException {
+        Servidor.candidatos.add(c);
         List<ExperienciaLaboral> x = new ArrayList<>();
         ExperienciaLaboral y = new ExperienciaLaboral();
         y.setCargo("vendedor de perico");

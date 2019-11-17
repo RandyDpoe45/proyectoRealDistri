@@ -7,13 +7,13 @@ package servidor;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
+import negocio.Candidato;
 import negocio.Oferta;
 
 /**
  *
- * @author randy
+ * @author gustavo
  */
-public interface OperacionesOferta extends Remote {
-    Oferta imprimirOferta(Oferta o,List<String> ips) throws RemoteException;
+public interface ServerInterface extends Remote {
+    void conectWithServer(String ip) throws RemoteException;
 }
