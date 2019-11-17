@@ -74,6 +74,7 @@ public class ImplementacionCandidato implements OperacionesCandidato{
         }finally{
             locker.unlockRead();
         }
+        if(!que.isEmpty()){
         try {
             locker.lockWrite();
             Entry<Oferta> o = que.poll();
@@ -94,6 +95,7 @@ public class ImplementacionCandidato implements OperacionesCandidato{
             } catch (InterruptedException ex) {
                 Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
         }
         return c;
     }
