@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.ExperienciaLaboral;
 import negocio.SectorEmpresa;
+import persistencia.Reader;
 
 /**
  *
@@ -35,17 +36,15 @@ public class Cliente {
     /**
      * @param args the command line arguments
      */
-    private static Map<String,SectorEmpresa> stringToSector=new HashMap<String,SectorEmpresa>();
+    
     public static void main(String[] args) {
-        stringToSector.put("comercio", SectorEmpresa.comercio);
-        stringToSector.put("financiero", SectorEmpresa.financiero);
-        stringToSector.put("manufactura", SectorEmpresa.manufactura);
+        
         try {
             //System.setProperty("java.rmi.server.hostname","192.168.43.171");
             Registry registry = LocateRegistry.getRegistry("127.0.0.1", 9635);
             OperacionesCandidato stub = (OperacionesCandidato) registry.lookup("Candidato");
             String file="./src/persistencia/candidatos.txt";
-            read(file,stub);
+            Reader.read(file,stub);
         } catch (RemoteException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
@@ -54,59 +53,7 @@ public class Cliente {
 
     }
     
-    private static void read(String file,OperacionesCandidato stub){ 
 
-        List<Candidato> listaCandidatos = new ArrayList<>();
-
-        File archivoCandidatos = new File(file);
-
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader(archivoCandidatos));
-        String st;
-
-        while ((st = br.readLine()) != null) {
-            String[] info_candidato = st.split(" ");
-
-            String nombre = info_candidato[0];
-            String documento = info_candidato[1];
-            int nivel_estudios = Integer.parseInt(info_candidato[2]);
-            float aspiracion_salarial = Float.parseFloat(info_candidato[3].trim());
-
-            Candidato candidato = new Candidato(nombre, documento, nivel_estudios, aspiracion_salarial);
-            List<ExperienciaLaboral> listaExperienciasLaborales = new ArrayList<>();
-
-            while (!"0".equals(st = br.readLine())) {
-                String[] experiencia_laboral = st.split(" ");
-
-                String cargo = experiencia_laboral[0];
-                int duracion = Integer.parseInt(experiencia_laboral[1].trim());
-                SectorEmpresa sector = stringToSector.get(experiencia_laboral[2]);
-
-                ExperienciaLaboral info_experiencia_laboral = new ExperienciaLaboral(cargo, duracion, sector);
-                listaExperienciasLaborales.add(info_experiencia_laboral);
-            }
-            candidato.setExperiencia(listaExperienciasLaborales);
-
-            try {
-
-                stub.imprimirCandidato(candidato,new ArrayList<>());
-            } catch (RemoteException e) {
-                System.out.println("Excepcion: " + e);
-            }
-
-            listaCandidatos.add(candidato);
-            int tiempo_espera = Integer.parseInt(br.readLine().trim());
-            Thread.sleep(tiempo_espera * 1000);
-        }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
 
     
