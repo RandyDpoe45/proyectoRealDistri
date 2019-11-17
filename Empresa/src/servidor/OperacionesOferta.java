@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package servidor;
-
+import negocio.Sobre;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import negocio.Oferta;
@@ -14,6 +14,6 @@ import negocio.Oferta;
  * @author randy
  */
 public interface OperacionesOferta extends Remote {
-    Oferta imprimirOferta(Oferta o) throws RemoteException;
-    Oferta registrarOferta(Oferta o) throws RemoteException;
+    void registrar(String hostName,int port) throws RemoteException;
+    Oferta registrarOferta(Sobre<Oferta> s) throws RemoteException;
 }

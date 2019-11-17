@@ -6,6 +6,7 @@
 package negocio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,6 @@ import java.util.List;
 public class Oferta implements Serializable {
     
     private static final long serialVersionUID = 1L;
-    private static Long id;
     private Long identificador;
     private String cargo;
     private int nivelEstudios;
@@ -25,13 +25,12 @@ public class Oferta implements Serializable {
     private List<Candidato> candidatosAsignados;
 
     public Oferta(String cargo, int nivelEstudios, int experienciaRequerida, float salarioOfrecido, SectorEmpresa sectorEmpresa) {
+        this.candidatosAsignados=new ArrayList<>();
         this.cargo = cargo;
         this.nivelEstudios = nivelEstudios;
         this.experienciaRequerida = experienciaRequerida;
         this.salarioOfrecido = salarioOfrecido;
         this.sectorEmpresa = sectorEmpresa;
-        this.identificador = id;
-        id++;
     }
 
     

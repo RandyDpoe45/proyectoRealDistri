@@ -66,7 +66,7 @@ public class ImplementacionCandidato implements OperacionesCandidato{
             locker.lockRead();
             for(DataEntry<Oferta> o : this.ofertas.values()){
                 
-                que.add(new Entry(Oferta.evaluarCandidato(o.getData(), c),o));
+                que.add(new Entry(Oferta.evaluarCandidato(o.getData(), c),o.getData()));
             }
             
         } catch (InterruptedException ex) {
@@ -85,7 +85,9 @@ public class ImplementacionCandidato implements OperacionesCandidato{
                 CandidatoCliente cc = this.candidatoClientes.get(candi.getHostName());
                 cc.actualizarCandidato(c.getDocumento(),off.getData().getIdentificador() , off.getData());
                 OfertaCliente oc = this.ofertasCliente.get(off.getHostName());
+                System.out.println("notificando:"+c);
                 oc.notificarOferta(off.getData().getIdentificador(), c, c.getDocumento());
+                System.out.println("---:"+c);
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);

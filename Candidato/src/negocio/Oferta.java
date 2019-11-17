@@ -6,6 +6,7 @@
 package negocio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class Oferta implements Serializable {
     private List<Candidato> candidatosAsignados;
 
     public Oferta(String cargo, int nivelEstudios, int experienciaRequerida, float salarioOfrecido, SectorEmpresa sectorEmpresa) {
+        this.candidatosAsignados=new ArrayList<>();
         this.cargo = cargo;
         this.nivelEstudios = nivelEstudios;
         this.experienciaRequerida = experienciaRequerida;

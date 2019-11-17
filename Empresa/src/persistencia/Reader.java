@@ -6,6 +6,7 @@
 package persistencia;
 
 import java.io.BufferedReader;
+import negocio.Sobre;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class Reader {
     
     
      private static Map<String,SectorEmpresa> stringToSector=new HashMap<String,SectorEmpresa>();
-    public static void read(String file,OperacionesOferta stub,List<Oferta> ofertas){ 
+    public static void read(String file,OperacionesOferta stub,List<Oferta> ofertas,String IP,int port){ 
         
         stringToSector.put("comercio", SectorEmpresa.comercio);
         stringToSector.put("financiero", SectorEmpresa.financiero);
@@ -56,8 +57,8 @@ public class Reader {
             Oferta oferta = new Oferta(cargo, nivel_estudios,experiencia, salario,sector);
 
             try {
-
-                stub.imprimirOferta(oferta,new ArrayList<>());
+                Oferta resultado=stub.registrarOferta(new Sobre<Oferta>(IP+":"+port,oferta));
+                System.out.println(resultado);
             } catch (RemoteException e) {
                 System.out.println("Excepcion: " + e);
             }

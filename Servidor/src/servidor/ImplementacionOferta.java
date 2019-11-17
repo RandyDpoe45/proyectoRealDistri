@@ -10,6 +10,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -24,7 +25,7 @@ import negocio.Sobre;
  * @author randy
  */
 public class ImplementacionOferta implements OperacionesOferta{
-    private static Long indiceOferta;
+    private static Long indiceOferta =Long.valueOf(0);
     private Map<Long,DataEntry<Oferta>> ofertas;
     private Map<String,DataEntry<Candidato>> candidatos;
     private Map<String,CandidatoCliente> candidatoClientes;
@@ -44,6 +45,9 @@ public class ImplementacionOferta implements OperacionesOferta{
     @Override
     public Oferta registrarOferta(Sobre<Oferta> s) throws RemoteException {
         Oferta o = s.getData();
+        if(o.getCandidatosAsignados()==null){
+            o.setCandidatosAsignados(new ArrayList<>());
+        }
         o.setIdentificador(indiceOferta);
         indiceOferta ++;
         try {
@@ -63,13 +67,14 @@ public class ImplementacionOferta implements OperacionesOferta{
             
             locker.lockRead();
             for(DataEntry<Candidato> c : this.candidatos.values()){
-                que.add(new Entry(Oferta.evaluarCandidato(o, c.getData()),c));
+                que.add(new Entry(Oferta.evaluarCandidato(o, c.getData()),c.getData()));
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             locker.unlockRead();
         }
+        if(!que.isEmpty()){
         try {
             locker.lockWrite();
             DataEntry<Oferta> of = this.ofertas.get(o.getIdentificador());
@@ -77,12 +82,17 @@ public class ImplementacionOferta implements OperacionesOferta{
             for(int i=0;i<3 && !que.isEmpty();){
                 
                 Entry<Candidato> aux = que.poll();
-                if(aux.getValue().getOfertaAsignadas() == null && aux.getPuntaje() >= 70){
-                    aux.getValue().setOfertaAsignadas(o);
-                    o.getCandidatosAsignados().add(aux.getValue());
-                    CandidatoCliente candi = this.candidatoClientes.get(aux.getValue().getDocumento());
-                    candi.actualizarCandidato(aux.getValue().getDocumento(), o.getIdentificador(), o);
-                    ofc.notificarOferta(o.getIdentificador(), aux.getValue(), aux.getValue().getDocumento());
+                Candidato can=(Candidato)aux.getValue();
+                if(can.getOfertaAsignadas() == null && aux.getPuntaje() >= 70){
+                    can.setOfertaAsignadas(o);
+                    System.out.println("1:"+o);
+                    System.out.println("2:"+o.getCandidatosAsignados());
+                    System.out.println("3:"+can);
+                    o.getCandidatosAsignados().add(can);
+                    System.out.println(this.candidatoClientes.keySet()+"::"+this.candidatos.get(can.getDocumento()).getHostName());
+                    CandidatoCliente candi = this.candidatoClientes.get(this.candidatos.get(can.getDocumento()).getHostName());
+                    candi.actualizarCandidato(can.getDocumento(), o.getIdentificador(), o);
+                    ofc.notificarOferta(o.getIdentificador(), can, can.getDocumento());
                     i++;
                 }
                 
@@ -95,6 +105,7 @@ public class ImplementacionOferta implements OperacionesOferta{
             } catch (InterruptedException ex) {
                 Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
         }
         return o;
         

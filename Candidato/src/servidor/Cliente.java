@@ -30,7 +30,7 @@ public class Cliente {
      */
     public static void main(String[] args) {
         Scanner scn=new Scanner(System.in);
-        String IP="192.168.43.17";
+        String IP="127.0.0.1";
         int port=scn.nextInt();
         try {
             List<Candidato> candidatos=new ArrayList<>();
@@ -41,7 +41,7 @@ public class Cliente {
             reg.rebind("CandidatoCliente", cc);
             Registry registry = LocateRegistry.getRegistry("127.0.0.1", 9635);
             OperacionesCandidato stub = (OperacionesCandidato) registry.lookup("Candidato");
-            stub.registrar(IP, 15000);
+            stub.registrar(IP, port);
             Reader.read("./src/persistencia/candidatos.txt", stub, IP,port);
         } catch (RemoteException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);

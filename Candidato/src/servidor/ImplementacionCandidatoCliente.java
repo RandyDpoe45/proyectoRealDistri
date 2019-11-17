@@ -30,6 +30,7 @@ public class ImplementacionCandidatoCliente implements CandidatoCliente{
     @Override
     public void actualizarCandidato(String cedula, Long identificador, Oferta oferta) throws RemoteException {
         try {
+            System.out.println("in");
             this.locker.lockRead();
             for(Candidato c:this.candidatos){
                 if(c.getDocumento().trim().equals(cedula.trim())){
@@ -38,6 +39,7 @@ public class ImplementacionCandidatoCliente implements CandidatoCliente{
                     
                 }
             }
+            System.out.println("actualizar:"+oferta);
         } catch (InterruptedException ex) {
             Logger.getLogger(ImplementacionCandidatoCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
