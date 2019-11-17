@@ -21,6 +21,13 @@ public class Candidato implements Serializable{
     private float aspiracionLaboral;
     private List<ExperienciaLaboral> experiencia;
 
+    public Candidato(String nombre, String documento, int nivel_estudios, float aspiracion_salarial) {
+        this.aspiracionLaboral=aspiracion_salarial;
+        this.documento=documento;
+        this.nombre=nombre;
+        this.nivelEstudios=nivel_estudios;
+    }
+
     public String getNombre() {
         return nombre;
     }

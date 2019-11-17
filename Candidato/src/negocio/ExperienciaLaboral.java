@@ -17,6 +17,12 @@ public class ExperienciaLaboral implements Serializable{
     private int duracion;
     private SectorEmpresa sectorEmpresa;
 
+    public ExperienciaLaboral(String cargo, int duracion, SectorEmpresa sector) {
+        this.cargo=cargo;
+        this.duracion=duracion;
+        this.sectorEmpresa=sector;
+    }
+
     public String getCargo() {
         return cargo;
     }
