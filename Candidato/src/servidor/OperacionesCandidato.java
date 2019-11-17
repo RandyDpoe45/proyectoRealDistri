@@ -8,14 +8,14 @@ package servidor;
 import negocio.Candidato;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import negocio.Sobre;
 
 /**
  *
  * @author randy
  */
 public interface OperacionesCandidato extends Remote {
-    Candidato imprimirCandidato(Candidato c) throws RemoteException;
-    Candidato registrarCandidato(Candidato c) throws RemoteException;
-    
+    void registrar(String hostName,int port) throws RemoteException;
+    Candidato registrarCandidato(Sobre<Candidato> s) throws RemoteException;
     
 }
