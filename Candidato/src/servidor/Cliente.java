@@ -90,7 +90,7 @@ public class Cliente {
 
             try {
 
-                stub.imprimirCandidato(candidato);
+                stub.imprimirCandidato(candidato,new ArrayList<>());
             } catch (RemoteException e) {
                 System.out.println("Excepcion: " + e);
             }

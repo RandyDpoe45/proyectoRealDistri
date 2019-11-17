@@ -8,11 +8,12 @@ package servidor;
 import negocio.Candidato;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  *
  * @author randy
  */
 public interface OperacionesCandidato extends Remote {
-    Candidato imprimirCandidato(Candidato c) throws RemoteException;
+    Candidato imprimirCandidato(Candidato c,List<String> ips) throws RemoteException;
 }
