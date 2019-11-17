@@ -15,4 +15,7 @@ import java.rmi.RemoteException;
  */
 public interface OperacionesCandidato extends Remote {
     Candidato imprimirCandidato(Candidato c) throws RemoteException;
+    Candidato registrarCandidato(Candidato c) throws RemoteException;
+    
+    
 }

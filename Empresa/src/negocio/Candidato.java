@@ -7,6 +7,7 @@ package negocio;
 
 import negocio.ExperienciaLaboral;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,18 @@ public class Candidato implements Serializable{
     private int nivelEstudios;
     private float aspiracionLaboral;
     private List<ExperienciaLaboral> experiencia;
+    private Long idOferta;
+    private Oferta ofertaAsignadas ;
 
+    public Candidato(String nombre, String documento, int nivelEstudios, float aspiracionLaboral) {
+        this.nombre = nombre;
+        this.documento = documento;
+        this.nivelEstudios = nivelEstudios;
+        this.aspiracionLaboral = aspiracionLaboral;
+        this.experiencia = new ArrayList<>();
+    }
+
+    
     public String getNombre() {
         return nombre;
     }
@@ -61,6 +73,23 @@ public class Candidato implements Serializable{
         this.experiencia = experiencia;
     }
 
+    public Oferta getOfertaAsignadas() {
+        return ofertaAsignadas;
+    }
+
+    public void setOfertaAsignadas(Oferta ofertasAsignadas) {
+        this.ofertaAsignadas = ofertasAsignadas;
+    }
+
+    public Long getIdOferta() {
+        return idOferta;
+    }
+
+    public void setIdOferta(Long idOferta) {
+        this.idOferta = idOferta;
+    }
+
+    
     @Override
     public String toString() {
         return "Candidato{" + "nombre=" + nombre + ", documento=" + documento + ", nivelEstudios=" + nivelEstudios + ", aspiracionLaboral=" + aspiracionLaboral + ", experiencia=" + experiencia + '}';

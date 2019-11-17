@@ -14,5 +14,6 @@ import negocio.Oferta;
  * @author randy
  */
 public interface OperacionesOferta extends Remote {
-    Oferta imprimirOferta(Oferta o) throws RemoteException;;
+    Oferta imprimirOferta(Oferta o) throws RemoteException;
+    Oferta registrarOferta(Oferta o) throws RemoteException;
 }

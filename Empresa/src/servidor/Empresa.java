@@ -28,11 +28,8 @@ public class Empresa {
             //System.setProperty("java.rmi.server.hostname","192.168.43.171");
             Registry registry = LocateRegistry.getRegistry("192.168.43.171", 9635);
             OperacionesOferta stub = (OperacionesOferta) registry.lookup("Oferta");
-            Oferta o = new Oferta();
-            o.setCargo("vendedor de perico");
-            o.setExperienciaRequerida(3);
-            Oferta response = stub.imprimirOferta(o);
-            System.out.println(response.getCargo());
+            
+            //System.out.println(response.getCargo());
         } catch (RemoteException ex) {
             Logger.getLogger(Oferta.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {

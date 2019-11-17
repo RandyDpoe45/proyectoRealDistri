@@ -28,11 +28,7 @@ public class Cliente {
             //System.setProperty("java.rmi.server.hostname","192.168.43.171");
             Registry registry = LocateRegistry.getRegistry("192.168.43.171", 9635);
             OperacionesCandidato stub = (OperacionesCandidato) registry.lookup("Candidato");
-            Candidato c = new Candidato();
-            c.setNombre("nada");
-            c.setDocumento("123456");
-            Candidato response = stub.imprimirCandidato(c);
-            System.out.println(response.getExperiencia().get(0).getCargo());
+            
         } catch (RemoteException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
