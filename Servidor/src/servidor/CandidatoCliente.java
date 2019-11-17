@@ -5,13 +5,15 @@
  */
 package servidor;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import negocio.Candidato;
+import negocio.Oferta;
 
 /**
  *
  * @author randy
  */
-public interface OfertaCliente {
-    void notificarOferta (Long identificador , Candidato c , String documento) throws RemoteException;
+public interface CandidatoCliente extends Remote{
+    void actualizarCandidato(String  cedula,Long identificador ,Oferta oferta) throws RemoteException;
 }

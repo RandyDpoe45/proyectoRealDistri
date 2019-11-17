@@ -15,7 +15,7 @@ import negocio.Sobre;
  * @author randy
  */
 public interface OperacionesCandidato extends Remote {
-    void registrar(String hostName) throws RemoteException;
-    Candidato registrarCandidato(Sobre s) throws RemoteException;
+    void registrar(String hostName,int port) throws RemoteException;
+    Candidato registrarCandidato(Sobre<Candidato> s) throws RemoteException;
     
 }

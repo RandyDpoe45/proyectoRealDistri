@@ -5,10 +5,18 @@
  */
 package servidor;
 
+import java.rmi.RemoteException;
+import negocio.Candidato;
+
 /**
  *
  * @author randy
  */
-public class ImplementacionOfertaCliente {
+public class ImplementacionOfertaCliente implements OfertaCliente{
+
+    @Override
+    public void notificarOferta(Long identificador, Candidato c, String documento) throws RemoteException {
+        
+    }
     
 }
