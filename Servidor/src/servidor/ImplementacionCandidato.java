@@ -105,6 +105,7 @@ public class ImplementacionCandidato implements OperacionesCandidato{
             Registry candidatoClient = LocateRegistry.getRegistry(hostName, port);
             CandidatoCliente candidatoStub = (CandidatoCliente) candidatoClient.lookup("CandidatoCliente");
             this.candidatoClientes.put(hostName+":"+port, candidatoStub);
+            System.out.println("eisito");
         } catch (NotBoundException ex) {
             Logger.getLogger(ImplementacionCandidato.class.getName()).log(Level.SEVERE, null, ex);
         } catch (AccessException ex) {
