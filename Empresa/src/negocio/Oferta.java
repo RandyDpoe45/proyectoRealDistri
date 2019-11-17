@@ -20,6 +20,14 @@ public class Oferta implements Serializable {
     private float salarioOfrecido; 
     private SectorEmpresa sectorEmpresa ;
     private List<Candidato> candidatos;
+
+    public Oferta(String cargo, int nivel_estudios, int experiencia, float salario, SectorEmpresa sector) {
+        this.cargo=cargo;
+        this.experienciaRequerida=experiencia;
+        this.nivelEstudios=nivel_estudios;
+        this.salarioOfrecido=salario;
+        this.sectorEmpresa=sector;
+    }
     
     public List<Candidato> getCandidatos(){
         return candidatos;

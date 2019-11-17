@@ -1,0 +1,4 @@
+cargo 2 1 3000000 financiero
+10
+cargo 2 1 3000000 financiero
+10

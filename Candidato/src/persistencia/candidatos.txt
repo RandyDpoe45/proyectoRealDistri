@@ -19,6 +19,3 @@ coordinadora_cobros 1 financiero
 directora_mercadeo 2 financiero
 0
 30
-
- 
-
