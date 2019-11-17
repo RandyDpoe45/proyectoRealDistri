@@ -102,4 +102,16 @@ public class Oferta implements Serializable {
         }
         return puntaje;
     }
+
+    public Long getIdentificador() {
+        return identificador;
+    }
+
+    public void addCandidatoAsignados(Candidato c) {
+        this.candidatosAsignados.add(c);
+    }
+
+    
+    
+    
 }
