@@ -5,6 +5,7 @@
  */
 package servidor;
 
+import java.net.UnknownHostException;
 import negocio.Candidato;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
@@ -31,6 +32,16 @@ public class Cliente {
     public static void main(String[] args) {
         Scanner scn=new Scanner(System.in);
         String IP="127.0.0.1";
+        String ServerIP="127.0.0.1";
+        try {
+            IP = java.net.InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException ex) { 
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(IP);
+        System.out.println("serverIP:");
+        ServerIP=scn.next();
+        System.out.println("port:");
         int port=scn.nextInt();
         try {
             List<Candidato> candidatos=new ArrayList<>();
@@ -39,7 +50,7 @@ public class Cliente {
             CandidatoCliente cc= (CandidatoCliente) UnicastRemoteObject.exportObject(icc, port);
             Registry reg = LocateRegistry.createRegistry(port);
             reg.rebind("CandidatoCliente", cc);
-            Registry registry = LocateRegistry.getRegistry("127.0.0.1", 9635);
+            Registry registry = LocateRegistry.getRegistry(ServerIP, 9635);
             OperacionesCandidato stub = (OperacionesCandidato) registry.lookup("Candidato");
             stub.registrar(IP, port);
             Reader.read("./src/persistencia/candidatos.txt", stub, IP,port);

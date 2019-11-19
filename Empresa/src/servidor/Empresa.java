@@ -32,12 +32,16 @@ public class Empresa {
     public static void main(String[] args) {
         Scanner scn=new Scanner(System.in);
         String IP = null;
+        String ServerIP=null;
         try {
             IP = java.net.InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException ex) {
             Logger.getLogger(Empresa.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println(IP);
+        System.out.println("serverIP:");
+        ServerIP=scn.next();
+        System.out.println("port:");
         int port=scn.nextInt();
         try {
             List<Oferta> ofertas=new ArrayList<>();
@@ -46,7 +50,7 @@ public class Empresa {
             OfertaCliente oc=(OfertaCliente) UnicastRemoteObject.exportObject(ioc, port);
             Registry reg = LocateRegistry.createRegistry(port);
             reg.rebind("OfertaCliente", oc);
-            Registry registry = LocateRegistry.getRegistry("127.0.0.1", 9635);
+            Registry registry = LocateRegistry.getRegistry(ServerIP, 9635);
             OperacionesOferta stub = (OperacionesOferta) registry.lookup("Oferta");
             stub.registrar(IP, port);
             Reader.read("./src/persistencia/ofertas.txt", stub, ofertas,IP,port);
