@@ -81,15 +81,14 @@ public class ImplementacionCandidato implements OperacionesCandidato{
             if(o.getPuntaje()>70){
                 DataEntry<Oferta> off = this.ofertas.get(o.getValue().getIdentificador());
                 c.setOfertaAsignadas(o.getValue());
-                System.out.println("identificador:"+o.getValue().getIdentificador());
                 c.setIdOferta(o.getValue().getIdentificador());
                 DataEntry<Candidato> candi = this.candidatos.get(c.getDocumento());
                 CandidatoCliente cc = this.candidatoClientes.get(candi.getHostName());
                 //cc.actualizarCandidato(c.getDocumento(),off.getData().getIdentificador() , off.getData());
                 OfertaCliente oc = this.ofertasCliente.get(off.getHostName());
-                System.out.println("notificando:"+c);
+                
                 oc.notificarOferta(off.getData().getIdentificador(), c, c.getDocumento());
-                System.out.println("---:"+c);
+                System.out.println("notificando:"+c);
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
@@ -117,7 +116,7 @@ public class ImplementacionCandidato implements OperacionesCandidato{
             }
         }
         //end forwad
-        System.out.println(c.getOfertaAsignadas());
+        System.out.println(c);
         return c;
     }
 
@@ -128,7 +127,6 @@ public class ImplementacionCandidato implements OperacionesCandidato{
             Registry candidatoClient = LocateRegistry.getRegistry(hostName, port);
             CandidatoCliente candidatoStub = (CandidatoCliente) candidatoClient.lookup("CandidatoCliente");
             this.candidatoClientes.put(hostName+":"+port, candidatoStub);
-            System.out.println("eisito");
         } catch (NotBoundException ex) {
             Logger.getLogger(ImplementacionCandidato.class.getName()).log(Level.SEVERE, null, ex);
         } catch (AccessException ex) {

@@ -5,6 +5,15 @@
  */
 package presentacion;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import negocio.Candidato;
+import negocio.Oferta;
+
 /**
  *
  * @author gustavo
@@ -14,10 +23,44 @@ public class VistaCandidatos extends javax.swing.JFrame {
     /**
      * Creates new form VistaCandidatos
      */
-    public VistaCandidatos() {
+    private List<Candidato> candidatos;
+    public VistaCandidatos(List<Candidato> candidatos) {
+        this.candidatos=candidatos;
         initComponents();
+        try {
+            actualizarEntradas();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(VistaCandidatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
     }
+    
+        public void actualizarEntradas() throws InterruptedException{
+        DefaultTableModel dm;
+        dm=(DefaultTableModel) Entradas.getModel();
+        int rowCount = dm.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i =0; i <rowCount; i++) {
+            dm.removeRow(0);
+        }
+        for(Candidato c:candidatos){
+            Oferta of=c.getOfertaAsignadas();
+            Object[] row=new Object[]{
+                c.getNombre(), 
+                c.getDocumento(), 
+                c.getNivelEstudios(),
+                c.getAspiracionLaboral()
+            };
+            dm.addRow(row);
+        }
 
+        Entradas.setModel(dm);
+        dm.fireTableDataChanged();
+        Entradas.repaint();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,14 +72,14 @@ public class VistaCandidatos extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Entradas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Entradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -46,7 +89,7 @@ public class VistaCandidatos extends javax.swing.JFrame {
                 "Nombre", "Documento", "Estudios", "Aspiracion"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Entradas);
 
         jPanel1.add(jScrollPane1);
 
@@ -58,6 +101,7 @@ public class VistaCandidatos extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -85,14 +129,14 @@ public class VistaCandidatos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaCandidatos().setVisible(true);
+                new VistaCandidatos(new ArrayList<>()).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Entradas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

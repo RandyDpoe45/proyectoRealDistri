@@ -162,7 +162,7 @@ public class EmpresaGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Entradas = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        CandidatosButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
@@ -200,8 +200,13 @@ public class EmpresaGUI extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1);
 
-        jButton2.setText("ver candidatos");
-        getContentPane().add(jButton2);
+        CandidatosButton.setText("ver candidatos");
+        CandidatosButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CandidatosButtonMouseClicked(evt);
+            }
+        });
+        getContentPane().add(CandidatosButton);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -219,6 +224,13 @@ public class EmpresaGUI extends javax.swing.JFrame {
         };
         t.start();
     }//GEN-LAST:event_startButtonMouseClicked
+
+    private void CandidatosButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CandidatosButtonMouseClicked
+        System.out.println("candidatos");
+        int selected=Entradas.getSelectedRow();
+        Oferta o=ofertas.get(selected);
+        VistaCandidatos vc=new VistaCandidatos(o.getCandidatosAsignados());
+    }//GEN-LAST:event_CandidatosButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -257,9 +269,9 @@ public class EmpresaGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CandidatosButton;
     private javax.swing.JTable Entradas;
     private javax.swing.JTextField IPTextField;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

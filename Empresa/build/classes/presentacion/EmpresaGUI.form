@@ -114,10 +114,13 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="CandidatosButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="ver candidatos"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CandidatosButtonMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
