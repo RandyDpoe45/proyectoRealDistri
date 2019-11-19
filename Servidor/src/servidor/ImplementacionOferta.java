@@ -80,7 +80,9 @@ public class ImplementacionOferta implements OperacionesOferta{
             DataEntry<Oferta> of = this.ofertas.get(o.getIdentificador());
             OfertaCliente ofc = this.ofertasCliente.get(of.getHostName());
             if(ofc==null){
-                OfertaCliente oc=(OfertaCliente) LocateRegistry.getRegistry(of.getHostName()).lookup("OfertaCliente");
+                String[] split;
+                split = of.getHostName().split(":");
+                OfertaCliente oc=(OfertaCliente) LocateRegistry.getRegistry(split[0],Integer.decode(split[1])).lookup("OfertaCliente");
                 this.ofertasCliente.put(of.getHostName(), oc);
                 ofc=oc;
             }
@@ -95,7 +97,9 @@ public class ImplementacionOferta implements OperacionesOferta{
                     CandidatoCliente candi = this.candidatoClientes.get(this.candidatos.get(can.getDocumento()).getHostName());
                     if(candi==null){
                         DataEntry<Candidato> entry = this.candidatos.get(can.getDocumento());
-                        CandidatoCliente cc=(CandidatoCliente) LocateRegistry.getRegistry(entry.getHostName()).lookup("CandidatoCliente");
+                        String[] split;
+                        split = entry.getHostName().split(":");
+                        CandidatoCliente cc=(CandidatoCliente) LocateRegistry.getRegistry(split[0],Integer.decode(split[1])).lookup("CandidatoCliente");
                         this.candidatoClientes.put(entry.getHostName(), cc);
                         candi=cc;
                     }
