@@ -53,7 +53,7 @@ public class Cliente {
             Registry registry = LocateRegistry.getRegistry(ServerIP, 9635);
             OperacionesCandidato stub = (OperacionesCandidato) registry.lookup("Candidato");
             stub.registrar(IP, port);
-            Reader.read("./src/persistencia/candidatos.txt", stub, IP,port);
+            Reader.read("./src/persistencia/candidatos.txt", stub, IP,port,candidatos);
         } catch (RemoteException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {

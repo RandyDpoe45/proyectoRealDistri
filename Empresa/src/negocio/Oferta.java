@@ -110,6 +110,10 @@ public class Oferta implements Serializable {
         this.candidatosAsignados.add(c);
     }
 
+    public void setIdentificador(Long identificador) {
+        this.identificador = identificador;
+    }
+
     
     
     

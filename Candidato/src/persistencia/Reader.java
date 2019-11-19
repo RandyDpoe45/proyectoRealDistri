@@ -34,11 +34,10 @@ public class Reader {
         private static Map<String,SectorEmpresa> stringToSector=new HashMap<String,SectorEmpresa>();
         
         
-        public static void read(String file,OperacionesCandidato stub,String IP,int port){ 
+        public static void read(String file,OperacionesCandidato stub,String IP,int port,List<Candidato> listaCandidatos){ 
         stringToSector.put("comercio", SectorEmpresa.comercio);
         stringToSector.put("financiero", SectorEmpresa.financiero);
         stringToSector.put("manufactura", SectorEmpresa.manufactura);
-        List<Candidato> listaCandidatos = new ArrayList<>();
 
         File archivoCandidatos = new File(file);
 

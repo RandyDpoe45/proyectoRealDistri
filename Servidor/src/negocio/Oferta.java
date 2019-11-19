@@ -112,4 +112,15 @@ public class Oferta implements Serializable {
         }
         return puntaje;
     }
+
+    public static void setId(Long id) {
+        Oferta.id = id;
+    }
+
+    public static Long getId() {
+        return id;
+    }
+    
+    
+    
 }

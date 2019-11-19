@@ -104,4 +104,9 @@ public class Oferta implements Serializable {
         }
         return puntaje;
     }
+
+
+    public Long getId() {
+        return this.identificador;
+    }
 }

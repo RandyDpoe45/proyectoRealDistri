@@ -78,6 +78,7 @@ public class Candidato implements Serializable{
     }
 
     public void setOfertaAsignadas(Oferta ofertasAsignadas) {
+        this.idOferta=ofertasAsignadas.getIdentificador();
         this.ofertaAsignadas = ofertasAsignadas;
     }
 

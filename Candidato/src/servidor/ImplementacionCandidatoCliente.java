@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.Candidato;
 import negocio.Oferta;
+import presentacion.ClienteGUI;
 
 /**
  *
@@ -20,6 +21,7 @@ public class ImplementacionCandidatoCliente implements CandidatoCliente{
 
     private List<Candidato> candidatos;
     private Locker locker;
+    public static ClienteGUI gui;
     
     public ImplementacionCandidatoCliente(List<Candidato> candidatos) {
         this.candidatos = candidatos;
@@ -40,6 +42,9 @@ public class ImplementacionCandidatoCliente implements CandidatoCliente{
                 }
             }
             System.out.println("actualizar:"+oferta);
+            if(gui!=null){
+                gui.actualizarEntradas();
+            }
         } catch (InterruptedException ex) {
             Logger.getLogger(ImplementacionCandidatoCliente.class.getName()).log(Level.SEVERE, null, ex);
         }

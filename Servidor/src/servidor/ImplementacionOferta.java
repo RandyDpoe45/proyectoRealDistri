@@ -104,7 +104,6 @@ public class ImplementacionOferta implements OperacionesOferta{
                         candi=cc;
                     }
                     candi.actualizarCandidato(can.getDocumento(), o.getIdentificador(), o);
-                    ofc.notificarOferta(o.getIdentificador(), can, can.getDocumento());
                     i++;
                 }
                 

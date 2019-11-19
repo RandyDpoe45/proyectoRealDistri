@@ -31,7 +31,8 @@ public class Candidato implements Serializable{
         this.aspiracionLaboral = aspiracionLaboral;
         this.experiencia = new ArrayList<>();
     }
-
+    
+    
     
     public String getNombre() {
         return nombre;
@@ -78,6 +79,7 @@ public class Candidato implements Serializable{
     }
 
     public void setOfertaAsignadas(Oferta ofertasAsignadas) {
+        this.idOferta=ofertasAsignadas.getIdentificador();
         this.ofertaAsignadas = ofertasAsignadas;
     }
 
