@@ -88,6 +88,12 @@ public class ImplementacionOferta implements OperacionesOferta{
                     o.getCandidatosAsignados().add(can);
                     System.out.println(this.candidatoClientes.keySet()+"::"+this.candidatos.get(can.getDocumento()).getHostName());
                     CandidatoCliente candi = this.candidatoClientes.get(this.candidatos.get(can.getDocumento()).getHostName());
+                    if(candi==null){
+                        DataEntry<Candidato> entry = this.candidatos.get(can.getDocumento());
+                        CandidatoCliente cc=(CandidatoCliente) LocateRegistry.getRegistry(entry.getHostName());
+                        this.candidatoClientes.put(entry.getHostName(), cc);
+                        candi=cc;
+                    }
                     candi.actualizarCandidato(can.getDocumento(), o.getIdentificador(), o);
                     ofc.notificarOferta(o.getIdentificador(), can, can.getDocumento());
                     i++;
