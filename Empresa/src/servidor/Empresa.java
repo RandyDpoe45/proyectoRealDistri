@@ -5,6 +5,7 @@
  */
 package servidor;
 
+import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -30,7 +31,13 @@ public class Empresa {
      */
     public static void main(String[] args) {
         Scanner scn=new Scanner(System.in);
-        String IP="127.0.0.1";
+        String IP = null;
+        try {
+            IP = java.net.InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Empresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(IP);
         int port=scn.nextInt();
         try {
             List<Oferta> ofertas=new ArrayList<>();

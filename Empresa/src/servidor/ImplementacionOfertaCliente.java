@@ -7,6 +7,8 @@ package servidor;
 
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import negocio.Candidato;
 import negocio.Oferta;
 
@@ -28,7 +30,18 @@ public class ImplementacionOfertaCliente implements OfertaCliente{
     
     @Override
     public void notificarOferta(Long identificador, Candidato c, String documento) throws RemoteException {
-        System.out.println("actualizar:"+c);
+        try {
+            System.out.println("in");
+            this.locker.lockRead();
+            for(Oferta o:this.ofertas){
+                if(o.getIdentificador()==identificador){
+                    o.addCandidatoAsignados(c);
+                }
+            }
+            System.out.println("actualizar:"+c);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ImplementacionOfertaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
     
 }
