@@ -17,13 +17,14 @@ import negocio.Oferta;
  * @author randy
  */
 public class ImplementacionOfertaCliente implements OfertaCliente{
-    
+    private static ImplementacionOfertaCliente self;
     private List<Oferta> ofertas;
     private Locker locker;
 
     public ImplementacionOfertaCliente(List<Oferta> ofertas) {
         this.ofertas = ofertas;
         this.locker=new Locker();
+        self=this;
     }
     
     

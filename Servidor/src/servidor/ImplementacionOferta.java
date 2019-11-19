@@ -27,6 +27,7 @@ import static servidor.ImplementacionCandidato.gui;
  * @author randy
  */
 public class ImplementacionOferta implements OperacionesOferta{
+    private static ImplementacionOferta self;
     private static Long indiceOferta =Long.valueOf(0);
     private Map<Long,DataEntry<Oferta>> ofertas;
     private Map<String,DataEntry<Candidato>> candidatos;
@@ -41,6 +42,7 @@ public class ImplementacionOferta implements OperacionesOferta{
         this.candidatoClientes = candidatoClientes;
         this.ofertasCliente = ofertasCliente;
         this.locker = new Locker();
+        self=this;
     }
     
     

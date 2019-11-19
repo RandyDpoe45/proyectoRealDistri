@@ -27,7 +27,7 @@ import presentacion.VistaServidor;
  * @author randy
  */
 public class ImplementacionCandidato implements OperacionesCandidato{
-
+    private static ImplementacionCandidato self;
     private Map<Long,DataEntry<Oferta>> ofertas;
     private Map<String,DataEntry<Candidato>> candidatos;
     private Map<String,CandidatoCliente> candidatoClientes;

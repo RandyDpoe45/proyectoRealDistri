@@ -18,7 +18,7 @@ import presentacion.ClienteGUI;
  * @author randy
  */
 public class ImplementacionCandidatoCliente implements CandidatoCliente{
-
+    private static ImplementacionCandidatoCliente self;
     private List<Candidato> candidatos;
     private Locker locker;
     public static ClienteGUI gui;
@@ -26,6 +26,7 @@ public class ImplementacionCandidatoCliente implements CandidatoCliente{
     public ImplementacionCandidatoCliente(List<Candidato> candidatos) {
         this.candidatos = candidatos;
         this.locker = new Locker();
+        self=this;
     }
     
     
