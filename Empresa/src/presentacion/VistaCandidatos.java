@@ -46,7 +46,6 @@ public class VistaCandidatos extends javax.swing.JFrame {
             dm.removeRow(0);
         }
         for(Candidato c:candidatos){
-            Oferta of=c.getOfertaAsignadas();
             Object[] row=new Object[]{
                 c.getNombre(), 
                 c.getDocumento(), 

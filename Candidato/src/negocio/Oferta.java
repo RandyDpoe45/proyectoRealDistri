@@ -36,6 +36,14 @@ public class Oferta implements Serializable {
         id++;
     }
 
+    public Long getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(Long identificador) {
+        this.identificador = identificador;
+    }
+
     
     public List<Candidato> getCandidatosAsignados() {
         return candidatosAsignados;
@@ -106,7 +114,15 @@ public class Oferta implements Serializable {
     }
 
 
-    public Long getId() {
-        return this.identificador;
+
+    public boolean addCandidato(Candidato can) {
+        if(this.candidatosAsignados.size()<3){
+            this.candidatosAsignados.add(can);
+            return true;
+        }
+        return false;
     }
+    
+    
+    
 }

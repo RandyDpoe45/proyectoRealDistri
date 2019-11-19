@@ -89,13 +89,12 @@ public class ClienteGUI extends javax.swing.JFrame {
             dm.removeRow(0);
         }
         for(Candidato c:candidatos){
-            Oferta of=c.getOfertaAsignadas();
             Object[] row=new Object[]{
                 c.getNombre(), 
                 c.getDocumento(), 
                 c.getNivelEstudios(),
                 c.getAspiracionLaboral(),
-                (of!=null)?of.getId():"none"
+                (c.getIdOferta()!=null)?c.getIdOferta():"none"
             };
             dm.addRow(row);
         }

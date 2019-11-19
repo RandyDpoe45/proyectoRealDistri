@@ -39,7 +39,6 @@ public class ImplementacionCandidatoCliente implements CandidatoCliente{
                 if(c.getDocumento().trim().equals(cedula.trim())){
                     c.setOfertaAsignadas(oferta);
                     c.setIdOferta(identificador);
-                    
                 }
             }
             System.out.println("actualizar:"+oferta);

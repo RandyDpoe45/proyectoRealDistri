@@ -22,7 +22,7 @@ public class Candidato implements Serializable{
     private float aspiracionLaboral;
     private List<ExperienciaLaboral> experiencia;
     private Long idOferta;
-    private Oferta ofertaAsignadas ;
+    private List<Oferta> ofertaAsignadas ;
 
     public Candidato(String nombre, String documento, int nivelEstudios, float aspiracionLaboral) {
         this.nombre = nombre;
@@ -30,6 +30,7 @@ public class Candidato implements Serializable{
         this.nivelEstudios = nivelEstudios;
         this.aspiracionLaboral = aspiracionLaboral;
         this.experiencia = new ArrayList<>();
+        this.ofertaAsignadas=new ArrayList<>();
     }
 
     
@@ -73,13 +74,16 @@ public class Candidato implements Serializable{
         this.experiencia = experiencia;
     }
 
-    public Oferta getOfertaAsignadas() {
+    public List<Oferta> getOfertaAsignadas() {
         return ofertaAsignadas;
     }
 
-    public void setOfertaAsignadas(Oferta ofertasAsignadas) {
-        this.idOferta=ofertasAsignadas.getIdentificador();
-        this.ofertaAsignadas = ofertasAsignadas;
+    public void setOfertaAsignadas(Oferta ofertaAsignada) {
+        this.idOferta=ofertaAsignada.getIdentificador();
+        if(this.ofertaAsignadas==null){
+            this.ofertaAsignadas=new ArrayList<>();
+        }
+        this.ofertaAsignadas.add(ofertaAsignada);
     }
 
     public Long getIdOferta() {

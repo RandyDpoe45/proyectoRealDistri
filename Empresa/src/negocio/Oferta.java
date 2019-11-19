@@ -16,6 +16,7 @@ import java.util.List;
 public class Oferta implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    private static Long id;
     private Long identificador;
     private String cargo;
     private int nivelEstudios;
@@ -31,6 +32,17 @@ public class Oferta implements Serializable {
         this.experienciaRequerida = experienciaRequerida;
         this.salarioOfrecido = salarioOfrecido;
         this.sectorEmpresa = sectorEmpresa;
+        id=(id==null)?0:id;
+        this.identificador = id;
+        id++;
+    }
+
+    public Long getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(Long identificador) {
+        this.identificador = identificador;
     }
 
     
@@ -102,18 +114,15 @@ public class Oferta implements Serializable {
         return puntaje;
     }
 
-    public Long getIdentificador() {
-        return identificador;
-    }
 
-    public void addCandidatoAsignados(Candidato c) {
-        this.candidatosAsignados.add(c);
-    }
 
-    public void setIdentificador(Long identificador) {
-        this.identificador = identificador;
+    public boolean addCandidato(Candidato can) {
+        if(this.candidatosAsignados.size()<3){
+            this.candidatosAsignados.add(can);
+            return true;
+        }
+        return false;
     }
-
     
     
     

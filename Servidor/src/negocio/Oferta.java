@@ -113,12 +113,14 @@ public class Oferta implements Serializable {
         return puntaje;
     }
 
-    public static void setId(Long id) {
-        Oferta.id = id;
-    }
 
-    public static Long getId() {
-        return id;
+
+    public boolean addCandidato(Candidato can) {
+        if(this.candidatosAsignados.size()<3){
+            this.candidatosAsignados.add(can);
+            return true;
+        }
+        return false;
     }
     
     

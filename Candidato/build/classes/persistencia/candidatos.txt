@@ -19,3 +19,13 @@ coordinadora_cobros 1 financiero
 directora_mercadeo 2 financiero
 0
 1
+camacho 79638333 5 1200000
+auxiliar_bodega 5 manufactura
+coordinador_logistica 1 manufactura
+0
+1
+paquita 79638444 5 1200000
+auxiliar_bodega 5 manufactura
+coordinador_logistica 1 manufactura
+0
+1

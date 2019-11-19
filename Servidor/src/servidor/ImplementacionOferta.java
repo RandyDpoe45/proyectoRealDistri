@@ -50,6 +50,9 @@ public class ImplementacionOferta implements OperacionesOferta{
     @Override
     public Oferta registrarOferta(Sobre<Oferta> s,List<String> ips) throws RemoteException {
         Oferta o = s.getData();
+        if(o.getCandidatosAsignados().size()>=3){
+            return o;
+        }
         if(o.getCandidatosAsignados()==null){
             o.setCandidatosAsignados(new ArrayList<>());
         }
@@ -85,15 +88,15 @@ public class ImplementacionOferta implements OperacionesOferta{
         if(!que.isEmpty()){
         try {
             locker.lockWrite();
-            DataEntry<Oferta> of = this.ofertas.get(o.getIdentificador());
-            OfertaCliente ofc = this.ofertasCliente.get(of.getHostName());
+            //DataEntry<Oferta> of = this.ofertas.get(o.getIdentificador());
+            //OfertaCliente ofc = this.ofertasCliente.get(of.getHostName());
             for(int i=0;i<3 && !que.isEmpty();){
-                
+                System.out.println("i:"+i);
                 Entry<Candidato> aux = que.poll();
                 Candidato can=(Candidato)aux.getValue();
-                if(can.getOfertaAsignadas() == null && aux.getPuntaje() >= 70){
+                if( aux.getPuntaje() >= 70){
                     can.setOfertaAsignadas(o);
-                    o.getCandidatosAsignados().add(can);
+                    o.addCandidato(can);
                     System.out.println(this.candidatoClientes.keySet()+"::"+this.candidatos.get(can.getDocumento()).getHostName());
                     CandidatoCliente candi = this.candidatoClientes.get(this.candidatos.get(can.getDocumento()).getHostName());
                     if(candi==null){
@@ -139,6 +142,7 @@ public class ImplementacionOferta implements OperacionesOferta{
             }
         }
         //end forwad
+        System.out.println(o.getCandidatosAsignados());
         System.out.println(o);
         try {
             gui.actualizarEntradas();

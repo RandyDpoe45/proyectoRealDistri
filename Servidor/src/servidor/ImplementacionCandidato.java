@@ -78,22 +78,23 @@ public class ImplementacionCandidato implements OperacionesCandidato{
         }finally{
             locker.unlockRead();
         }
-        if(!que.isEmpty()){
         try {
             locker.lockWrite();
+            while(!que.isEmpty()){
             Entry<Oferta> o = que.poll();
             if(o.getPuntaje()>70){
                 DataEntry<Oferta> off = this.ofertas.get(o.getValue().getIdentificador());
                 c.setOfertaAsignadas(o.getValue());
                 c.setIdOferta(o.getValue().getIdentificador());
-                DataEntry<Candidato> candi = this.candidatos.get(c.getDocumento());
-                CandidatoCliente cc = this.candidatoClientes.get(candi.getHostName());
+                //DataEntry<Candidato> candi = this.candidatos.get(c.getDocumento());
+                //CandidatoCliente cc = this.candidatoClientes.get(candi.getHostName());
                 //cc.actualizarCandidato(c.getDocumento(),off.getData().getIdentificador() , off.getData());
                 OfertaCliente oc = this.ofertasCliente.get(off.getHostName());
-                
+                o.getValue().addCandidato(c);
                 oc.notificarOferta(off.getData().getIdentificador(), c, c.getDocumento());
                 System.out.println("notificando:"+c);
             }
+        }
         } catch (InterruptedException ex) {
             Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
@@ -102,7 +103,6 @@ public class ImplementacionCandidato implements OperacionesCandidato{
             } catch (InterruptedException ex) {
                 Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
         }
         //forward server
         ips.add(VistaServidor.IP);

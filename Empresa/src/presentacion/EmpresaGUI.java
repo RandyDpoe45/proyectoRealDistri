@@ -206,6 +206,11 @@ public class EmpresaGUI extends javax.swing.JFrame {
                 CandidatosButtonMouseClicked(evt);
             }
         });
+        CandidatosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CandidatosButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(CandidatosButton);
 
         pack();
@@ -228,9 +233,13 @@ public class EmpresaGUI extends javax.swing.JFrame {
     private void CandidatosButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CandidatosButtonMouseClicked
         System.out.println("candidatos");
         int selected=Entradas.getSelectedRow();
-        Oferta o=ofertas.get(selected);
+        Oferta o=ImplementacionOfertaCliente.self.ofertas.get(selected);
         VistaCandidatos vc=new VistaCandidatos(o.getCandidatosAsignados());
     }//GEN-LAST:event_CandidatosButtonMouseClicked
+
+    private void CandidatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CandidatosButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CandidatosButtonActionPerformed
 
     /**
      * @param args the command line arguments
