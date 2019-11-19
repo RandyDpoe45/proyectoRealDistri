@@ -104,7 +104,7 @@ public class ImplementacionCandidato implements OperacionesCandidato{
         }
         }
         //forward server
-        ips.add(Servidor.IP);
+        ips.add(VistaServidor.IP);
         for(String ip:ServerImplementation.vecinos.keySet()){
             if(!ips.contains(ip)){
                 Registry R=ServerImplementation.vecinos.get(ip);
