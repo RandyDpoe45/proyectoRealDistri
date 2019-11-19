@@ -40,7 +40,7 @@ public class VistaServidor extends javax.swing.JFrame {
     /**
      * Creates new form VistaServidor
      */
-    private static String IP="127.0.0.1";
+    public static String IP="127.0.0.1";
     private static String serverIP="127.0.0.1";
     private static Map<String,DataEntry<Candidato>> candidatos = new HashMap<>();  
     private static Map<Long,DataEntry<Oferta>> ofertas = new HashMap<>();

@@ -32,8 +32,6 @@ public class ServerImplementation implements Serializable, ServerInterface{
         self=this;
     }
     
-    
-    
     public static void addVecinoLocal(String ip) throws RemoteException{
         Registry registry=LocateRegistry.getRegistry(ip,9635);
         vecinos.put(ip, registry);
