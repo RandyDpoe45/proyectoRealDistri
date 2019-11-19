@@ -41,6 +41,7 @@ public class ImplementacionCandidato implements OperacionesCandidato{
         this.candidatoClientes = candidatoClientes;
         this.ofertasCliente = ofertasCliente;
         this.locker = new Locker();
+        self=this;
     }
     
     
