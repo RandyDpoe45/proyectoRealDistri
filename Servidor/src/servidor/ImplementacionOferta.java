@@ -79,6 +79,11 @@ public class ImplementacionOferta implements OperacionesOferta{
             locker.lockWrite();
             DataEntry<Oferta> of = this.ofertas.get(o.getIdentificador());
             OfertaCliente ofc = this.ofertasCliente.get(of.getHostName());
+            if(ofc==null){
+                OfertaCliente oc=(OfertaCliente) LocateRegistry.getRegistry(of.getHostName()).lookup("OfertaCliente");
+                this.ofertasCliente.put(of.getHostName(), oc);
+                ofc=oc;
+            }
             for(int i=0;i<3 && !que.isEmpty();){
                 
                 Entry<Candidato> aux = que.poll();
