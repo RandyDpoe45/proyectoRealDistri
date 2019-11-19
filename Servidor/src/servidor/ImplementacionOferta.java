@@ -90,7 +90,7 @@ public class ImplementacionOferta implements OperacionesOferta{
                     CandidatoCliente candi = this.candidatoClientes.get(this.candidatos.get(can.getDocumento()).getHostName());
                     if(candi==null){
                         DataEntry<Candidato> entry = this.candidatos.get(can.getDocumento());
-                        CandidatoCliente cc=(CandidatoCliente) LocateRegistry.getRegistry(entry.getHostName());
+                        CandidatoCliente cc=(CandidatoCliente) LocateRegistry.getRegistry(entry.getHostName()).lookup("CandidatoCliente");
                         this.candidatoClientes.put(entry.getHostName(), cc);
                         candi=cc;
                     }
@@ -102,7 +102,11 @@ public class ImplementacionOferta implements OperacionesOferta{
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        }   catch (NotBoundException ex) {
+                Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (AccessException ex) {
+                Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
             try {
                 locker.unlockWrite();
             } catch (InterruptedException ex) {
