@@ -7,6 +7,7 @@ package servidor;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 import negocio.Oferta;
 import negocio.Sobre;
 
@@ -16,5 +17,5 @@ import negocio.Sobre;
  */
 public interface OperacionesOferta extends Remote {
     void registrar(String hostName, int port)throws RemoteException;
-    Oferta registrarOferta(Sobre<Oferta> s) throws RemoteException;
+    Oferta registrarOferta(Sobre<Oferta> s,List<String>ips) throws RemoteException;
 }

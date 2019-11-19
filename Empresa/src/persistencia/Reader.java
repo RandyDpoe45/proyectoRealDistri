@@ -57,7 +57,7 @@ public class Reader {
             Oferta oferta = new Oferta(cargo, nivel_estudios,experiencia, salario,sector);
 
             try {
-                Oferta resultado=stub.registrarOferta(new Sobre<Oferta>(IP+":"+port,oferta));
+                Oferta resultado=stub.registrarOferta(new Sobre<Oferta>(IP+":"+port,oferta),new ArrayList<>());
                 System.out.println(resultado);
             } catch (RemoteException e) {
                 System.out.println("Excepcion: " + e);

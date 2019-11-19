@@ -45,7 +45,7 @@ public class ImplementacionCandidato implements OperacionesCandidato{
 
 
     @Override
-    public Candidato registrarCandidato(Sobre<Candidato> s) throws RemoteException {
+    public Candidato registrarCandidato(Sobre<Candidato> s,List<String> ips) throws RemoteException {
         Candidato c = (Candidato) s.getData();
         try {
             locker.lockWrite();
@@ -99,6 +99,22 @@ public class ImplementacionCandidato implements OperacionesCandidato{
             }
         }
         }
+        //forward server
+        ips.add(Servidor.IP);
+        for(String ip:ServerImplementation.vecinos.keySet()){
+            if(!ips.contains(ip)){
+                Registry R=ServerImplementation.vecinos.get(ip);
+                try {
+                    OperacionesCandidato stub=(OperacionesCandidato) R.lookup("Candidato");
+                    c=stub.registrarCandidato(s, ips);
+                } catch (NotBoundException ex) {
+                    Logger.getLogger(ImplementacionCandidato.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (AccessException ex) {
+                    Logger.getLogger(ImplementacionCandidato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //end forwad
         return c;
     }
 

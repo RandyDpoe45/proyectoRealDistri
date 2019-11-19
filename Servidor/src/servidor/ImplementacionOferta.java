@@ -43,7 +43,7 @@ public class ImplementacionOferta implements OperacionesOferta{
     
 
     @Override
-    public Oferta registrarOferta(Sobre<Oferta> s) throws RemoteException {
+    public Oferta registrarOferta(Sobre<Oferta> s,List<String> ips) throws RemoteException {
         Oferta o = s.getData();
         if(o.getCandidatosAsignados()==null){
             o.setCandidatosAsignados(new ArrayList<>());
@@ -85,9 +85,6 @@ public class ImplementacionOferta implements OperacionesOferta{
                 Candidato can=(Candidato)aux.getValue();
                 if(can.getOfertaAsignadas() == null && aux.getPuntaje() >= 70){
                     can.setOfertaAsignadas(o);
-                    System.out.println("1:"+o);
-                    System.out.println("2:"+o.getCandidatosAsignados());
-                    System.out.println("3:"+can);
                     o.getCandidatosAsignados().add(can);
                     System.out.println(this.candidatoClientes.keySet()+"::"+this.candidatos.get(can.getDocumento()).getHostName());
                     CandidatoCliente candi = this.candidatoClientes.get(this.candidatos.get(can.getDocumento()).getHostName());
@@ -107,6 +104,22 @@ public class ImplementacionOferta implements OperacionesOferta{
             }
         }
         }
+        //forward server
+        ips.add(Servidor.IP);
+        for(String ip:ServerImplementation.vecinos.keySet()){
+            if(!ips.contains(ip)){
+                Registry R=ServerImplementation.vecinos.get(ip);
+                try {
+                    OperacionesOferta stub=(OperacionesOferta) R.lookup("Oferta");
+                    o=stub.registrarOferta(s, ips);
+                } catch (NotBoundException ex) {
+                    Logger.getLogger(ImplementacionCandidato.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (AccessException ex) {
+                    Logger.getLogger(ImplementacionCandidato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //end forwad
         return o;
         
     }

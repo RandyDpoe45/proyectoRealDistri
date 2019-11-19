@@ -71,7 +71,7 @@ public class Reader {
             candidato.setExperiencia(listaExperienciasLaborales);
 
             try {
-                Candidato output=stub.registrarCandidato(new Sobre<Candidato>(IP+":"+port,candidato));
+                Candidato output=stub.registrarCandidato(new Sobre<Candidato>(IP+":"+port,candidato),new ArrayList());
                 System.out.println(output);
             } catch (RemoteException e) {
                 System.out.println("Excepcion: " + e);
