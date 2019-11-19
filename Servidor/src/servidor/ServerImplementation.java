@@ -26,6 +26,13 @@ import negocio.Oferta;
  */
 public class ServerImplementation implements Serializable, ServerInterface{
     public static Map<String,Registry> vecinos=new HashMap<>();
+    private static ServerImplementation self;
+
+    public ServerImplementation() {
+        self=this;
+    }
+    
+    
     
     public static void addVecinoLocal(String ip) throws RemoteException{
         Registry registry=LocateRegistry.getRegistry(ip,9635);
