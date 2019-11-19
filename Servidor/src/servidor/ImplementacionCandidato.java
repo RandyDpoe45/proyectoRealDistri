@@ -52,8 +52,9 @@ public class ImplementacionCandidato implements OperacionesCandidato{
         Candidato c = (Candidato) s.getData();
         try {
             locker.lockWrite();
-             
-            this.candidatos.put(c.getDocumento(), new DataEntry<Candidato>(s.getHostName(),c));
+            if(candidatoClientes.keySet().contains(s.getHostName())){
+                this.candidatos.put(c.getDocumento(), new DataEntry<Candidato>(s.getHostName(),c));
+            }
         } catch (InterruptedException ex) {
             Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
         }finally{

@@ -57,7 +57,10 @@ public class ImplementacionOferta implements OperacionesOferta{
         indiceOferta ++;
         try {
             locker.lockWrite();
-            this.ofertas.put(s.getData().getIdentificador(), new DataEntry<Oferta>(s.getHostName(),s.getData()));
+            System.out.println(ofertasCliente.keySet()+":"+s.getHostName());
+            if(ofertasCliente.containsKey(s.getHostName())){
+                this.ofertas.put(s.getData().getIdentificador(), new DataEntry<Oferta>(s.getHostName(),s.getData()));
+            }
         } catch (InterruptedException ex) {
             Logger.getLogger(ImplementacionOferta.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
@@ -84,13 +87,6 @@ public class ImplementacionOferta implements OperacionesOferta{
             locker.lockWrite();
             DataEntry<Oferta> of = this.ofertas.get(o.getIdentificador());
             OfertaCliente ofc = this.ofertasCliente.get(of.getHostName());
-            if(ofc==null){
-                String[] split;
-                split = of.getHostName().split(":");
-                OfertaCliente oc=(OfertaCliente) LocateRegistry.getRegistry(split[0],Integer.decode(split[1])).lookup("OfertaCliente");
-                this.ofertasCliente.put(of.getHostName(), oc);
-                ofc=oc;
-            }
             for(int i=0;i<3 && !que.isEmpty();){
                 
                 Entry<Candidato> aux = que.poll();
