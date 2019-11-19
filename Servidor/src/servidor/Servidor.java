@@ -77,6 +77,8 @@ public class Servidor {
         }
     }
     
+    
+    
     private static void connectServer(String serverIP) throws RemoteException, NotBoundException{
         
         Registry ServerReg = LocateRegistry.getRegistry(serverIP, 9635);

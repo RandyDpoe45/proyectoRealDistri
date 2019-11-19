@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 import negocio.Candidato;
 import negocio.Oferta;
 import negocio.Sobre;
+import presentacion.VistaServidor;
+import static servidor.ImplementacionCandidato.gui;
 
 /**
  *
@@ -31,6 +33,7 @@ public class ImplementacionOferta implements OperacionesOferta{
     private Map<String,CandidatoCliente> candidatoClientes;
     private Map<String,OfertaCliente> ofertasCliente;
     private Locker locker;
+    public static VistaServidor gui;
 
     public ImplementacionOferta(Map<Long, DataEntry<Oferta>> ofertas, Map<String, DataEntry<Candidato>> candidatos, Map<String, CandidatoCliente> candidatoClientes, Map<String, OfertaCliente> ofertasCliente) {
         this.ofertas = ofertas;
@@ -138,6 +141,12 @@ public class ImplementacionOferta implements OperacionesOferta{
             }
         }
         //end forwad
+        System.out.println(o);
+        try {
+            gui.actualizarEntradas();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ImplementacionCandidato.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return o;
         
     }
