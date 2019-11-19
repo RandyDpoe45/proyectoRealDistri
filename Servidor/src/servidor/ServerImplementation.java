@@ -31,7 +31,7 @@ public class ServerImplementation implements Serializable, ServerInterface{
         Registry registry=LocateRegistry.getRegistry(ip, 9635);
          vecinos.put(ip,registry);
         try {
-            ServerInterface stub=(ServerInterface) registry.lookup("Server");
+            ServerInterface stub=(ServerInterface) registry.lookup("Servidor");
             stub.conectWithServer(Servidor.IP);
         } catch (NotBoundException ex) {
             Logger.getLogger(ServerImplementation.class.getName()).log(Level.SEVERE, null, ex);
