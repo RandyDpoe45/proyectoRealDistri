@@ -68,7 +68,7 @@ public class Servidor {
                 System.out.println("add server");
                 serverIP=scn.next();
                 Registry ServerReg = LocateRegistry.getRegistry(serverIP, 9635);
-                ServerInterface ServerStub = (ServerInterface) ServerReg.lookup("Oferta");
+                ServerInterface ServerStub = (ServerInterface) ServerReg.lookup("Servidor");
                 ServerStub.conectWithServer(IP);
             }
             
