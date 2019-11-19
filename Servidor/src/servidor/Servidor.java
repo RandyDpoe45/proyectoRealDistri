@@ -67,9 +67,7 @@ public class Servidor {
             while(!serverIP.equals("0.0.0.0")){
                 System.out.println("add server");
                 serverIP=scn.next();
-                Registry ServerReg = LocateRegistry.getRegistry(serverIP, 9635);
-                ServerInterface ServerStub = (ServerInterface) ServerReg.lookup("Servidor");
-                ServerStub.conectWithServer(IP);
+                connectServer(serverIP);
             }
             
         } catch (RemoteException ex) {
@@ -77,6 +75,14 @@ public class Servidor {
         } catch (NotBoundException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private static void connectServer(String serverIP) throws RemoteException, NotBoundException{
+        
+        Registry ServerReg = LocateRegistry.getRegistry(serverIP, 9635);
+        ServerInterface ServerStub = (ServerInterface) ServerReg.lookup("Servidor");
+        ServerStub.conectWithServer(IP);
+        ServerImplementation.addVecinoLocal(serverIP);
     }
     
 }
