@@ -64,7 +64,7 @@ public class Servidor {
             registry.rebind("Oferta", stub1);
             registry.rebind("Servidor", stub2);
             
-            while(serverIP.equals("0.0.0.0")){
+            while(!serverIP.equals("0.0.0.0")){
                 System.out.println("add server");
                 serverIP=scn.next();
                 Registry ServerReg = LocateRegistry.getRegistry(serverIP, 9635);
